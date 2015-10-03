@@ -2,6 +2,7 @@ package io.serious.not.notesrs;
 
 import java.util.Locale;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListener {
@@ -34,6 +38,9 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+
+    private static final int TAB_CORRECT = 0;
+    private static final int TAB_UPLOAD = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +110,7 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
         // When the given tab is selected, switch to the corresponding page in
         // the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
+
     }
 
     @Override
@@ -159,6 +167,20 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private int mTab;
+        LinearLayout layout;
+
+        /**
+         * onCreate, duh.
+         * @param savedInstanceState
+         */
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            if (getArguments() != null)
+                mTab = getArguments().getInt(ARG_SECTION_NUMBER);
+            else throw new RuntimeException("TabFragment needs a tab number");
+        }
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -178,9 +200,28 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main_note_srs, container, false);
-            return rootView;
+            Context c=container.getContext();
+
+
+            layout = new LinearLayout(c);
+            layout.setOrientation(LinearLayout.VERTICAL);
+
+            Button pickButton;
+            Button takeButton;
+
+            switch (mTab) {
+                case TAB_CORRECT:
+
+                    break;
+
+                case TAB_UPLOAD:
+
+                    break;
+            }
+
+            return layout;
         }
+
     }
 
 }
