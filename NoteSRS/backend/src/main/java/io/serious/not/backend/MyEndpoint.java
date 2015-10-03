@@ -30,11 +30,11 @@ public class MyEndpoint {
      * A simple endpoint method that takes a name and says Hi back
      */
     @ApiMethod(name = "correctText")
-    public MyBean correctText(@Named("input") String input) {
-        MyBean response = new MyBean();
+    public StringWrapper correctText(@Named("input") String input) {
+        StringWrapper response = new StringWrapper();
         response.setData("Hi, " + input);
 
-        //This is where we use that lib thing
+        //This is where we use that lib thing that Nideesh is making
 
         return response;
     }
@@ -43,11 +43,14 @@ public class MyEndpoint {
      * A simple endpoint method that takes a name and says Hi back
      */
     @ApiMethod(name = "insertAutoCucumberListItem")
-    public MyBean insertAutoCucumberListItem(@Named("word") String word, @Named("correction") String correction) {
-        MyBean success = new MyBean();
-
-        //This is where we input to datastore
-
+    public StringWrapper insertAutoCucumberListItem(@Named("word") String word, @Named("correction") String correction) {
+        StringWrapper success = new StringWrapper();
+        /* check if original word exists in datastore
+         * if it does not exist,
+         *      then create an OriginalWord node containing the original word
+         * create a new ReplacementWord node such that its parent is the original word
+         */
+        
         success.setData(word);
         return success;
     }

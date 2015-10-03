@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/3rLf9xUZb5a7CPLYPcy2HHYDTKo\"",
+ "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/fYlU_aXQFJL1zqNRP2uVqw0pH_s\"",
  "discoveryVersion": "v1",
  "id": "myApi:v1",
  "name": "myApi",
@@ -73,8 +73,8 @@
   }
  },
  "schemas": {
-  "MyBean": {
-   "id": "MyBean",
+  "StringWrapper": {
+   "id": "StringWrapper",
    "type": "object",
    "properties": {
     "data": {
@@ -99,7 +99,7 @@
     "input"
    ],
    "response": {
-    "$ref": "MyBean"
+    "$ref": "StringWrapper"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
@@ -107,7 +107,7 @@
   },
   "insertAutoCucumberListItem": {
    "id": "myApi.insertAutoCucumberListItem",
-   "path": "mybean/{word}/{correction}",
+   "path": "stringwrapper/{word}/{correction}",
    "httpMethod": "POST",
    "parameters": {
     "correction": {
@@ -126,7 +126,7 @@
     "correction"
    ],
    "response": {
-    "$ref": "MyBean"
+    "$ref": "StringWrapper"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
