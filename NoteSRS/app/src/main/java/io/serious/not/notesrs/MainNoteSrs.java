@@ -233,9 +233,9 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
                     correctButton = new Button(c);
                     correctButton.setText(R.string.correct);
                     correctButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                            new InsertAutoCucumberListItemAsyncTask().execute(new Pair<>(getContext(), "This is some RED BULL SHIT. "));
+                        @Override
+                        public void onClick(View v) {
+                            new CorrectAsyncTask().execute(new Pair<>(getContext(), "This is some RED BULL SHIT. "));
                         }
                     });
 
@@ -251,6 +251,12 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
                     layout.addView(uploadCorrectField);
                     uploadButton = new Button(c);
                     uploadButton.setText(R.string.upload);
+                    uploadButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            new InsertAutoCucumberListItemAsyncTask().execute(new Pair<>(getContext(), "This is some UPLOAD BULL SHIT. "));
+                        }
+                    });
                     layout.addView(uploadButton);
                     break;
             }
