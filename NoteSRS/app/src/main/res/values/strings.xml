@@ -3,4 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="title_section1">Correct</string>
+    <string name="title_section2">Upload</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_activity_main_note_srs">NoteSRS</string>
 </resources>
