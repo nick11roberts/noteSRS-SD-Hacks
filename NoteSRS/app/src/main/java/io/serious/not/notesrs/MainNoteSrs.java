@@ -44,6 +44,9 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
     private static final int TAB_CORRECT = 1;
     private static final int TAB_UPLOAD = 2;
 
+    private static final int MAX_LINES_CORRECT_TEXT_FIELD = 15;
+    private static final int MAX_LINES_SINGLE_WORD = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -223,12 +226,21 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
 
             switch (mTab) {
                 case TAB_CORRECT:
+                    correctTextField = new EditText(c);
+                    correctTextField.setMaxLines(MAX_LINES_CORRECT_TEXT_FIELD);
+                    layout.addView(correctTextField);
                     correctButton = new Button(c);
                     correctButton.setText(R.string.correct);
                     layout.addView(correctButton);
                     break;
 
                 case TAB_UPLOAD:
+                    uploadIncorrectField = new EditText(c);
+                    uploadIncorrectField.setMaxLines(MAX_LINES_SINGLE_WORD);
+                    layout.addView(uploadIncorrectField);
+                    uploadCorrectField = new EditText(c);
+                    uploadCorrectField.setMaxLines(MAX_LINES_SINGLE_WORD);
+                    layout.addView(uploadCorrectField);
                     uploadButton = new Button(c);
                     uploadButton.setText(R.string.upload);
                     layout.addView(uploadButton);
