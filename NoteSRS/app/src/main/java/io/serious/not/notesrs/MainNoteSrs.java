@@ -217,6 +217,10 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
             Button correctButton;
             Button uploadButton;
 
+            EditText correctTextField;
+            EditText uploadIncorrectField;
+            EditText uploadCorrectField;
+
             switch (mTab) {
                 case TAB_CORRECT:
                     correctButton = new Button(c);
