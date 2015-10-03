@@ -9,8 +9,15 @@ package io.serious.not.backend;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
 
 import javax.inject.Named;
+
+import static io.serious.not.backend.OfyService.ofy;
 
 /**
  * An endpoint class we are exposing
@@ -45,12 +52,27 @@ public class MyEndpoint {
     @ApiMethod(name = "insertAutoCucumberListItem")
     public StringWrapper insertAutoCucumberListItem(@Named("word") String word, @Named("correction") String correction) {
         StringWrapper success = new StringWrapper();
+        // Get the Datastore Service
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         /* check if original word exists in datastore
          * if it does not exist,
          *      then create an OriginalWord node containing the original word
          * create a new ReplacementWord node such that its parent is the original word
          */
-        
+        // Use class Query to assemble a query
+        OriginalWord newWord = new OriginalWord(word);
+        ReplacementWord newReplacement = new ReplacementWord(correction);
+        Query.Filter exactWordFilter = new Query.FilterPredicate("word", Query.FilterOperator.EQUAL, word);
+        Query q = new Query("OriginalWord").setFilter(exactWordFilter);
+        PreparedQuery pq = datastore.prepare(q);
+        Entity result = pq.asSingleEntity();
+        if(result == null){
+            ofy().save().entity(newWord).now();
+        }
+
+        newReplacement.setOriginalWordRef(newWord);
+        ofy().save().entity(newReplacement).now();
+
         success.setData(word);
         return success;
     }

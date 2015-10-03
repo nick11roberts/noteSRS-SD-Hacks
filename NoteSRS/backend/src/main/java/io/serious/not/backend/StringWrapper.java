@@ -14,4 +14,10 @@ public class StringWrapper {
     public void setData(String data) {
         myData = data;
     }
+
+    public StringWrapper(String data){
+        this.setData(data);
+    }
+
+    public StringWrapper(){}
 }
