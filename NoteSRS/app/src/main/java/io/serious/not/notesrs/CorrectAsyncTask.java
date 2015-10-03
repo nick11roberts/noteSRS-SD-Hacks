@@ -34,7 +34,7 @@ public class CorrectAsyncTask extends AsyncTask<Pair<Context, String>, Void, Str
         String name = params[0].second;
 
         try {
-            return myApiService.sayHi(name).execute().getData();
+            return myApiService.correctText(name).execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }

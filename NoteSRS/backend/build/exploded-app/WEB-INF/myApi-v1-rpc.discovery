@@ -1,6 +1,6 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/6int-j5-hwBLTs6BI7XfohlUDyo\"",
+ "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/3rLf9xUZb5a7CPLYPcy2HHYDTKo\"",
  "discoveryVersion": "v1",
  "id": "myApi:v1",
  "name": "myApi",
@@ -82,6 +82,24 @@
   }
  },
  "methods": {
+  "myApi.correctText": {
+   "id": "myApi.correctText",
+   "parameters": {
+    "input": {
+     "type": "string",
+     "required": true
+    }
+   },
+   "parameterOrder": [
+    "input"
+   ],
+   "returns": {
+    "$ref": "MyBean"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
   "myApi.insertAutoCucumberListItem": {
    "id": "myApi.insertAutoCucumberListItem",
    "parameters": {
@@ -97,24 +115,6 @@
    "parameterOrder": [
     "word",
     "correction"
-   ],
-   "returns": {
-    "$ref": "MyBean"
-   },
-   "scopes": [
-    "https://www.googleapis.com/auth/userinfo.email"
-   ]
-  },
-  "myApi.sayHi": {
-   "id": "myApi.sayHi",
-   "parameters": {
-    "name": {
-     "type": "string",
-     "required": true
-    }
-   },
-   "parameterOrder": [
-    "name"
    ],
    "returns": {
     "$ref": "MyBean"

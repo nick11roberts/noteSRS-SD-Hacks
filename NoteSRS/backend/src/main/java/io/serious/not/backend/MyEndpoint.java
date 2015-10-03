@@ -29,10 +29,12 @@ public class MyEndpoint {
     /**
      * A simple endpoint method that takes a name and says Hi back
      */
-    @ApiMethod(name = "sayHi")
-    public MyBean sayHi(@Named("name") String name) {
+    @ApiMethod(name = "correctText")
+    public MyBean correctText(@Named("input") String input) {
         MyBean response = new MyBean();
-        response.setData("Hi, " + name);
+        response.setData("Hi, " + input);
+
+        //This is where we use that lib thing
 
         return response;
     }
@@ -42,12 +44,12 @@ public class MyEndpoint {
      */
     @ApiMethod(name = "insertAutoCucumberListItem")
     public MyBean insertAutoCucumberListItem(@Named("word") String word, @Named("correction") String correction) {
-        MyBean response = new MyBean();
-        response.setData("Hi, " + word);
+        MyBean success = new MyBean();
 
         //This is where we input to datastore
 
-        return response;
+        success.setData(word);
+        return success;
     }
 
 }
