@@ -34,7 +34,7 @@ public class InsertAutoCucumberListItemAsyncTask extends AsyncTask<Pair<Context,
         String name = params[0].second;
 
         try {
-            return myApiService.sayHi(name).execute().getData();
+            return myApiService.insertAutoCucumberListItem(name, name).execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }

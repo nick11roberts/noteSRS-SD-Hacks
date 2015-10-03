@@ -37,4 +37,19 @@ public class MyEndpoint {
         return response;
     }
 
+    /**
+     * A simple endpoint method that takes a name and says Hi back
+     */
+    @ApiMethod(name = "insertAutoCucumberListItem")
+    public MyBean insertAutoCucumberListItem(@Named("word") String word, @Named("correction") String correction) {
+        MyBean response = new MyBean();
+        response.setData("Hi, " + word);
+
+        //This is where we input to datastore
+
+        return response;
+    }
+
 }
+
+
