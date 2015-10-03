@@ -206,7 +206,7 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            Context c=container.getContext();
+            final Context c = container.getContext();
 
 
             layout = new LinearLayout(c);
@@ -221,9 +221,9 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
             Button correctButton;
             Button uploadButton;
 
-            EditText correctTextField;
-            EditText uploadIncorrectField;
-            EditText uploadCorrectField;
+            final EditText correctTextField;
+            final EditText uploadIncorrectField;
+            final EditText uploadCorrectField;
 
             switch (mTab) {
                 case TAB_CORRECT:
@@ -235,7 +235,7 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
                     correctButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            new CorrectAsyncTask().execute(new Pair<>(getContext(), "This is some RED BULL SHIT. "));
+                            new CorrectAsyncTask().execute(new Pair<>(getContext(), correctTextField.getText().toString()));
                         }
                     });
 
@@ -254,7 +254,14 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
                     uploadButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            new InsertAutoCucumberListItemAsyncTask().execute(new Pair<>(getContext(), "This is some UPLOAD BULL SHIT. "));
+                            new InsertAutoCucumberListItemAsyncTask()
+                                    .execute(
+                                            new SingleAutoCucumber(
+                                                    uploadIncorrectField.getText().toString(),
+                                                    uploadCorrectField.getText().toString(),
+                                                    c
+                                            )
+                                    );
                         }
                     });
                     layout.addView(uploadButton);

@@ -17,12 +17,12 @@ import io.serious.not.backend.myApi.MyApi;
 /**
  * Created by nick on 10/3/15.
  */
-public class InsertAutoCucumberListItemAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+public class InsertAutoCucumberListItemAsyncTask extends AsyncTask<SingleAutoCucumber, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
 
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+    protected String doInBackground(SingleAutoCucumber... params) {
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                     .setRootUrl("https://notesrs-1087.appspot.com/_ah/api/");
@@ -30,11 +30,12 @@ public class InsertAutoCucumberListItemAsyncTask extends AsyncTask<Pair<Context,
             myApiService = builder.build();
         }
 
-        context = params[0].first;
-        String name = params[0].second;
+        context = params[0].getContext();
+        String toBeCorrected = params[0].getToBeCorrected();
+        String correction = params[0].getCorrection();
 
         try {
-            return myApiService.insertAutoCucumberListItem(name, name).execute().getData();
+            return myApiService.insertAutoCucumberListItem(toBeCorrected, correction).execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }
