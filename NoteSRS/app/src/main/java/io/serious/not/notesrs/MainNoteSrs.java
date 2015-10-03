@@ -167,7 +167,15 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends Fragment implements CorrectAsyncResponse  {
+
+        Button correctButton;
+        Button uploadButton;
+
+        EditText correctTextField;
+        EditText uploadIncorrectField;
+        EditText uploadCorrectField;
+
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -203,11 +211,18 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
         public PlaceholderFragment() {
         }
 
+        public void processFinish(String output){
+            //this you will received result fired from async class of onPostExecute(result) method.
+            if(correctTextField != null){
+                correctTextField.setText(output);
+            }
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             final Context c = container.getContext();
-
+            final Object currentClass = this;
 
             layout = new LinearLayout(c);
             layout.setOrientation(LinearLayout.VERTICAL);
@@ -218,15 +233,10 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
             txt.setSingleLine(false);
             txt.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
 
-            Button correctButton;
-            Button uploadButton;
-
-            final EditText correctTextField;
-            final EditText uploadIncorrectField;
-            final EditText uploadCorrectField;
-
             switch (mTab) {
                 case TAB_CORRECT:
+                    final CorrectAsyncTask placeholderCorrectAsyncTask = new CorrectAsyncTask();
+                    placeholderCorrectAsyncTask.delegate = this;
                     correctTextField = new EditText(c);
                     correctTextField.setMaxLines(MAX_LINES_CORRECT_TEXT_FIELD);
                     layout.addView(correctTextField);
@@ -235,7 +245,9 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
                     correctButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            new CorrectAsyncTask().execute(new Pair<>(getContext(), correctTextField.getText().toString()));
+                            CorrectAsyncTask correctAsyncTask = new CorrectAsyncTask();
+                            correctAsyncTask.delegate = placeholderCorrectAsyncTask.delegate;
+                            correctAsyncTask.execute(new Pair<>(getContext(), correctTextField.getText().toString()));
                         }
                     });
 

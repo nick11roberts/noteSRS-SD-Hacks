@@ -18,8 +18,14 @@ import io.serious.not.backend.myApi.MyApi;
  * Created by thomas on 10/3/15.
  */
 public class CorrectAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+    public CorrectAsyncResponse delegate = null;
     private static MyApi myApiService = null;
     private Context context;
+
+    @Override
+    protected void onPostExecute(String result) {
+        delegate.processFinish(result);
+    }
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -38,10 +44,5 @@ public class CorrectAsyncTask extends AsyncTask<Pair<Context, String>, Void, Str
         } catch (IOException e) {
             return e.getMessage();
         }
-    }
-
-    @Override
-    protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
     }
 }
