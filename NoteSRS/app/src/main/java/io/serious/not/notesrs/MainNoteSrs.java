@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.text.InputType;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -231,6 +232,13 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
                     layout.addView(correctTextField);
                     correctButton = new Button(c);
                     correctButton.setText(R.string.correct);
+                    correctButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                            new InsertAutoCucumberListItemAsyncTask().execute(new Pair<>(getContext(), "This is some RED BULL SHIT. "));
+                        }
+                    });
+
                     layout.addView(correctButton);
                     break;
 
