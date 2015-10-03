@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,8 +41,8 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
      */
     ViewPager mViewPager;
 
-    private static final int TAB_CORRECT = 0;
-    private static final int TAB_UPLOAD = 1;
+    private static final int TAB_CORRECT = 1;
+    private static final int TAB_UPLOAD = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,16 +208,26 @@ public class MainNoteSrs extends AppCompatActivity implements ActionBar.TabListe
             layout = new LinearLayout(c);
             layout.setOrientation(LinearLayout.VERTICAL);
 
-            Button pickButton;
-            Button takeButton;
+            EditText txt = new EditText(c);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 1.0f);
+            txt.setLayoutParams(lp);
+            txt.setSingleLine(false);
+            txt.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+
+            Button correctButton;
+            Button uploadButton;
 
             switch (mTab) {
                 case TAB_CORRECT:
-
+                    correctButton = new Button(c);
+                    correctButton.setText(R.string.correct);
+                    layout.addView(correctButton);
                     break;
 
                 case TAB_UPLOAD:
-
+                    uploadButton = new Button(c);
+                    uploadButton.setText(R.string.upload);
+                    layout.addView(uploadButton);
                     break;
             }
 

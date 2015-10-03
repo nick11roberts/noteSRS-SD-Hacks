@@ -8,4 +8,7 @@
     <string name="title_section2">Upload</string>
     <string name="title_section3">Section 3</string>
     <string name="title_activity_main_note_srs">NoteSRS</string>
+
+    <string name="correct">CORRECT</string>
+    <string name="upload">UPLOAD</string>
 </resources>
