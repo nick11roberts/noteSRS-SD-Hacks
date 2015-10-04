@@ -39,15 +39,20 @@ public class MyEndpoint {
     @ApiMethod(name = "correctText")
     public StringWrapper correctText(@Named("input") String input) {
         StringWrapper response = new StringWrapper();
-        response.setData("Hi, " + input);
+        FindAndReplace findAndReplaceHelper = new FindAndReplace();
 
-        //This is where we use that lib thing that Nideesh is making
+        response.setData(
+                findAndReplaceHelper.correctTextMatrix(
+                        findAndReplaceHelper.parseToTextMatrix(input)
+                )
+
+        );
 
         return response;
     }
 
     /**
-     * A simple endpoint method that takes a name and says Hi back
+     * A simple endpoint method that takes a name and says Hi back, just kidding...
      */
     @ApiMethod(name = "insertAutoCucumberListItem")
     public StringWrapper insertAutoCucumberListItem(@Named("word") String word, @Named("correction") String correction) {
@@ -55,7 +60,7 @@ public class MyEndpoint {
         // Get the Datastore Service
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         String editedWord = word.toLowerCase().replaceAll("[^a-z ]", "").replaceAll(" ", "");
-        String editedCorrection = correction.toLowerCase().replaceAll("[^a-z ]","").replaceAll(" ", "");
+        String editedCorrection = correction.toLowerCase().replaceAll("[^a-z ]", "").replaceAll(" ", "");
         OriginalWord newWord = new OriginalWord(editedWord);
         ReplacementWord newReplacement = new ReplacementWord(editedCorrection);
         Query.Filter exactWordFilter = new Query.FilterPredicate("word", Query.FilterOperator.EQUAL, word);
@@ -69,7 +74,7 @@ public class MyEndpoint {
         newReplacement.setOriginalWordRef(newWord);
         ofy().save().entity(newReplacement).now();
 
-        success.setData(editedWord);
+        success.setData(editedWord + "->" + editedCorrection);
         return success;
     }
 
