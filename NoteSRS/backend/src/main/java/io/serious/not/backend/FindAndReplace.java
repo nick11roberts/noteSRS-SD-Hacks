@@ -79,7 +79,9 @@ public class FindAndReplace {
                     }
                 }
             }
-            correctedParagraph += punctuationList.get(i);
+            if(punctuationList.size()-1 >= i) {
+                correctedParagraph += punctuationList.get(i);
+            }
         }
         if(correctedParagraph.length() > 0){
             return correctedParagraph.substring(1);
