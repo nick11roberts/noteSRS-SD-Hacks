@@ -74,7 +74,7 @@ public class MyEndpoint {
         newReplacement.setOriginalWordRef(newWord);
         ofy().save().entity(newReplacement).now();
 
-        success.setData(editedWord + "->" + editedCorrection);
+        success.setData(editedWord + " -> " + editedCorrection);
         return success;
     }
 
