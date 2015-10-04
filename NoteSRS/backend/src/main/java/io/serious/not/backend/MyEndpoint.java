@@ -54,14 +54,10 @@ public class MyEndpoint {
         StringWrapper success = new StringWrapper();
         // Get the Datastore Service
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-        /* check if original word exists in datastore
-         * if it does not exist,
-         *      then create an OriginalWord node containing the original word
-         * create a new ReplacementWord node such that its parent is the original word
-         */
-        // Use class Query to assemble a query
-        OriginalWord newWord = new OriginalWord(word);
-        ReplacementWord newReplacement = new ReplacementWord(correction);
+        String editedWord = word.toLowerCase().replaceAll("[^a-z ]", "").replaceAll(" ", "");
+        String editedCorrection = correction.toLowerCase().replaceAll("[^a-z ]","").replaceAll(" ", "");
+        OriginalWord newWord = new OriginalWord(editedWord);
+        ReplacementWord newReplacement = new ReplacementWord(editedCorrection);
         Query.Filter exactWordFilter = new Query.FilterPredicate("word", Query.FilterOperator.EQUAL, word);
         Query q = new Query("OriginalWord").setFilter(exactWordFilter);
         PreparedQuery pq = datastore.prepare(q);
@@ -73,7 +69,7 @@ public class MyEndpoint {
         newReplacement.setOriginalWordRef(newWord);
         ofy().save().entity(newReplacement).now();
 
-        success.setData(word);
+        success.setData(editedWord);
         return success;
     }
 
