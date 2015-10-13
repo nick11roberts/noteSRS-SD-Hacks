@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/NoteSRS.iml" filepath="$PROJECT_DIR$/NoteSRS.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/backend/backend.iml" filepath="$PROJECT_DIR$/backend/backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notesrs-mobile/notesrs-mobile.iml" filepath="$PROJECT_DIR$/notesrs-mobile/notesrs-mobile.iml" />
     </modules>
   </component>
 </project>
